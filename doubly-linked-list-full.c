@@ -118,8 +118,8 @@ int freeList(headNode* h){
 	listNode* p = h->first;
 
 	listNode* prev = NULL;       //prev를 null 초기화
-	while(p != NULL) {           /*p가 null이 아니라면 first인 p를 prev에 넣고 rlink를 p에 넣고 
-		prev = p;                  prev를 동적할당해제함, h도 동적할당해제*/
+	while(p != NULL) {           //p가 null이 아니라면 first인 p를 prev에 넣고 rlink를 p에 넣고 
+		prev = p;                //prev를 동적할당해제함, h도 동적할당해제*/
 		p = p->rlink;             
 		free(prev);
 	}
@@ -150,13 +150,7 @@ void printList(headNode* h) {
 	printf("  items = %d\n", i);              //몇개의 노드가 출력인지 확인
 }
 
-
-
-
-/**
- * list에 key에 대한 노드하나를 추가
- */
-int insertLast(headNode* h, int key) {
+int insertLast(headNode* h, int key) {              //리스트에 key에 대한 노드를 추가
 
 	listNode* node = (listNode*)malloc(sizeof(listNode)); //listNode크기만큼 동적할당
 	node->key = key;           //key를 Node의 key에, rlink와 llink를 null로 초기화
@@ -178,12 +172,7 @@ int insertLast(headNode* h, int key) {
 	return 0;
 }
 
-
-
-/**
- * list의 마지막 노드 삭제
- */
-int deleteLast(headNode* h) {
+int deleteLast(headNode* h) {                //리스트의 마지막 노드 삭제
 
 	if (h->first == NULL)
 	{
@@ -200,26 +189,18 @@ int deleteLast(headNode* h) {
 		free(n);
 		return 0;
 	}
-
 	/* 마지막 노드까지 이동 */
 	while(n->rlink != NULL) {         //rlink가 null이 되기전까지 trail에 n을 rlink를 n에 넣어줌
 		trail = n;
 		n = n->rlink;
 	}
-
 	/* n이 삭제되므로, 이전 노드의 링크 NULL 처리 */
 	trail->rlink = NULL;            
 	free(n);
-
 	return 0;
 }
 
-
-
-/**
- * list 처음에 key에 대한 노드하나를 추가
- */
-int insertFirst(headNode* h, int key) {
+int insertFirst(headNode* h, int key) {                 //리스트 처음에 key에 대한 노드하나를 추가
 
 	listNode* node = (listNode*)malloc(sizeof(listNode));      //listNode 크기만큼 동적할당,key와 rlink,rlink를 준비
 	node->key = key;
@@ -241,10 +222,7 @@ int insertFirst(headNode* h, int key) {
 	return 0;
 }
 
-/**
- * list의 첫번째 노드 삭제
- */
-int deleteFirst(headNode* h) {
+int deleteFirst(headNode* h) {            //리스트의 첫번째 노드 삭제
 
 	if (h->first == NULL)
 	{
@@ -255,17 +233,10 @@ int deleteFirst(headNode* h) {
 	h->first = n->rlink;
 
 	free(n);
-
 	return 0;
 }
 
-
-
-/**
- * 리스트의 링크를 역순으로 재 배치
- */
-int invertList(headNode* h) {
-
+int invertList(headNode* h) {               //리스트의 링크들을 역순으로 재배치
 
 	if(h->first == NULL) {
 		printf("nothing to invert...\n");            //first가 null이라면 전환할 것이 없음
@@ -282,13 +253,9 @@ int invertList(headNode* h) {
 		middle->rlink = trail;
 		middle->llink = n;
 	}
-
 	h->first = middle;              //first에 middle을 넣어줌
-
 	return 0;
 }
-
-
 
 /* 리스트를 검색하여, 입력받은 key보다 큰값이 나오는 노드 바로 앞에 삽입 */
 int insertNode(headNode* h, int key) {
@@ -318,20 +285,14 @@ int insertNode(headNode* h, int key) {
 			}
 			return 0;
 		}
-
 		n = n->rlink;          //rlink를 n에 넣어줌
 	}
-
 	/* 마지막 노드까지 찾지 못한 경우, 마지막에 삽입 */
 	insertLast(h, key);
 	return 0;
 }
 
-
-/**
- * list에서 key에 대한 노드 삭제
- */
-int deleteNode(headNode* h, int key) {
+int deleteNode(headNode* h, int key) {           //리스트에서 key에 대한 노드 삭제
 
 	if (h->first == NULL)
 	{
@@ -354,10 +315,8 @@ int deleteNode(headNode* h, int key) {
 			}
 			return 1;
 		}
-
 		n = n->rlink;
 	}
-
 	/* 찾지 못 한경우 */
 	printf("cannot find the node for key = %d\n", key);
 	return 1;
